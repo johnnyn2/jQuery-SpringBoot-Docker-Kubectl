@@ -7,22 +7,21 @@ import com.software.model.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/software")
 public class SoftwareController {
 	@Autowired
 	SoftwareService softwareService;
 	
-	@GetMapping(value = "/{name}")
-	public Software getSoftware(@PathVariable String name) {
+	@GetMapping(value = "/getSoftware")
+	public Software getSoftware(@RequestParam(name = "name") String name) {
 		return softwareService.getSoftware(name);
 	}
 	
-	@GetMapping(value = "/")
+	@GetMapping(value = "/getAll")
 	public ArrayList<Software> getAll() {
 		return softwareService.getAll();
 	}
 	
-	@GetMapping(value = "/test")
+	@GetMapping(value = "/")
 	public String isServerOK() {
 		return softwareService.test();
 	}
