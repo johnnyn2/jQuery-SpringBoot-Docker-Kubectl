@@ -1,15 +1,21 @@
 package com.software.model;
 
-public class Software {
+import javax.persistence.*;
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "software")
+public class Software{
+	@Id
+	@Column
 	private String name;
-	private double version;
+	@Column
+	private Double version;
+	@Column
 	private String description;
-	
-	public Software(String name, double version, String description) {
-		this.name = name;
-		this.version = version;
-		this.description = description;
-	}
 	
 	public String getName() {
 		return name;
@@ -19,11 +25,11 @@ public class Software {
 		this.name = name;
 	}
 	
-	public double getVersion() {
+	public Double getVersion() {
 		return version;
 	}
 	
-	public void setVersion(double version) {
+	public void setVersion(Double version) {
 		this.version = version;
 	}
 	
@@ -34,5 +40,4 @@ public class Software {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 }
