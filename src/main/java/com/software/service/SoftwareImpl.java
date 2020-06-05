@@ -4,9 +4,7 @@ import com.software.model.*;
 import com.software.repository.SoftwareRepository;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Service
@@ -20,29 +18,26 @@ public class SoftwareImpl implements SoftwareService{
 	
 	@Override
 	public Software get(String name) {
-		// TODO Auto-generated method stub
 		return repository.findById(name).orElse(null);
 	}
 
 	@Override
 	public List<Software> get() {
-		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
 	@Override
 	public Software save(Software software) {
-		// TODO Auto-generated method stub
 		return repository.save(software);
 	}
 	
+	@Override
 	public List<Software> saveAll(List<Software> softwares) {
 		return repository.saveAll(softwares);
 	}
 
 	@Override
 	public String delete(String name) {
-		// TODO Auto-generated method stub
 		repository.deleteById(name);
 		return name + "software removed...";
 	}
@@ -58,7 +53,6 @@ public class SoftwareImpl implements SoftwareService{
 
 	@Override
 	public String test() {
-		// TODO Auto-generated method stub
 		return "API is serving...";
 	}
 	

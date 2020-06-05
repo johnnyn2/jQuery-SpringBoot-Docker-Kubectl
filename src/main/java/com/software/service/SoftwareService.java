@@ -2,9 +2,7 @@ package com.software.service;
 
 import com.software.model.*;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.*;
 import java.util.List;
-import com.software.repository.*;
 
 @Service
 public interface SoftwareService {
