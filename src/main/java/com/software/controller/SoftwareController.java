@@ -30,8 +30,12 @@ public class SoftwareController {
 	}
 
 	@PostMapping("/addSoftware")
-	public String addSoftware(@RequestBody Software software) {
-		softwareRepository.save(software);
+	public String addSoftware() {
+		Software s = new Software();
+		s.setName("sdsd");
+		s.setVersion(1.3);
+		s.setDescription("sddsad");
+		softwareRepository.save(s);
 		return "success";
 	}
 
