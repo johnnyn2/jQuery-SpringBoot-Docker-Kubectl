@@ -19,44 +19,48 @@ public class SoftwareRepository implements SoftwareService {
 
 	@Override
 	public Software get(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().get(Software.class, name);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Software> get() {
-		// TODO Auto-generated method stub
 		return getSession().createCriteria(Software.class).list();
 	}
 
 	@Override
-	public void save(Software software) {
-		// TODO Auto-generated method stub
-		getSession().save(software);
+	public Software save(Software software) {
+        getSession().save(software);
+        return software;
 	}
 
 	@Override
-	public void saveAll(List<Software> softwares) {
-		// TODO Auto-generated method stub
-
+	public List<Software> saveAll(List<Software> softwares) {
+        for(Software s : softwares) {
+            getSession().save(s);
+        }
+        return softwares;
 	}
 
 	@Override
-	public String delete(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Software delete(String name) {
+        Software s = getSession().get(Software.class, name);
+        getSession().delete(s);
+		return s;
 	}
 
 	@Override
 	public Software update(Software software) {
-		// TODO Auto-generated method stub
-		return null;
+        Software s = getSession().get(Software.class, software.getName());
+        s.setName(software.getName());
+        s.setVersion(software.getVersion());
+        s.setDescription(software.getDescription());
+        getSession().update(s);
+		return s;
 	}
 
 	@Override
 	public String test() {
-		// TODO Auto-generated method stub
 		return "API is serving...";
 	}
 

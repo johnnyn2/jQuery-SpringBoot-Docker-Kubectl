@@ -12,11 +12,11 @@ public interface SoftwareService {
 
 	public List<Software> get();
 
-	public void save(Software software);
+	public Software save(Software software);
 
-	public void saveAll(List<Software> softwares);
+	public List<Software> saveAll(List<Software> softwares);
 
-	public String delete(String name);
+	public Software delete(String name);
 
 	public Software update(Software software);
 

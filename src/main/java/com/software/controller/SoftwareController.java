@@ -30,18 +30,13 @@ public class SoftwareController {
 	}
 
 	@PostMapping("/addSoftware")
-	public String addSoftware() {
-		Software s = new Software();
-		s.setName("sdsd");
-		s.setVersion(1.3);
-		s.setDescription("sddsad");
-		softwareRepository.save(s);
-		return "success";
+	public Software addSoftware(@RequestBody Software software) {
+		return softwareRepository.save(software);
 	}
 
 	@PostMapping("/addSoftwares")
-	public void addSoftwares(@RequestBody List<Software> softwares) {
-
+	public List<Software> addSoftwares(@RequestBody List<Software> softwares) {
+		return softwareRepository.saveAll(softwares);
 	}
 
 	@PutMapping("/update")
@@ -50,7 +45,7 @@ public class SoftwareController {
 	}
 
 	@DeleteMapping("/delete")
-	public String deleteProduct(@RequestParam(name = "name") String name) {
+	public Software deleteSoftware(@RequestParam(name = "name") String name) {
 		return softwareRepository.delete(name);
 	}
 
