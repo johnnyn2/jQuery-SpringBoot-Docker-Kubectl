@@ -1,6 +1,7 @@
 package com.software.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,18 @@ import com.software.repository.SoftwareRepository;
 public class SoftwareController {
 	@Autowired
 	private SoftwareRepository softwareRepository;
+
+	@GetMapping("/api/admin/hello")
+	public Map<String, String> adminSayHello() {
+		Map<String, String> result = Map.of("message", "admin say hello");
+		return result;
+	}
+
+	@GetMapping("/api/user/hello")
+	public Map<String, String> userSayHello() {
+		Map<String, String> result = Map.of("message", "user say hello");
+		return result;
+	}
 
 	@GetMapping("/getSoftware")
 	public Software getSoftware(@RequestParam(name = "name") String name) {
