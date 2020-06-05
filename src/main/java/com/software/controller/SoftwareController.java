@@ -1,49 +1,57 @@
 package com.software.controller;
 
-import com.software.service.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import com.software.model.*;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.software.model.Software;
+import com.software.repository.SoftwareRepository;
 
 @RestController
 public class SoftwareController {
 	@Autowired
-	SoftwareService softwareService;
-	
+	private SoftwareRepository softwareRepository;
+
 	@GetMapping("/getSoftware")
 	public Software getSoftware(@RequestParam(name = "name") String name) {
-		return softwareService.get(name);
+		return softwareRepository.get(name);
 	}
-	
+
 	@GetMapping("/getAll")
 	public List<Software> getAll() {
-		return softwareService.get();
+		return softwareRepository.get();
 	}
-	
+
 	@PostMapping("/addSoftware")
-	public Software addSoftware(@RequestBody Software software) {
-		return softwareService.save(software);
+	public String addSoftware(@RequestBody Software software) {
+		softwareRepository.save(software);
+		return "success";
 	}
-	
+
 	@PostMapping("/addSoftwares")
-	public List<Software> addSoftwares(@RequestBody List<Software>softwares) {
-		return softwareService.saveAll(softwares);
+	public void addSoftwares(@RequestBody List<Software> softwares) {
+
 	}
-	
+
 	@PutMapping("/update")
 	public Software updateSoftware(@RequestBody Software software) {
-		return softwareService.update(software);
+		return softwareRepository.update(software);
 	}
-	
+
 	@DeleteMapping("/delete")
 	public String deleteProduct(@RequestParam(name = "name") String name) {
-		return softwareService.delete(name);
+		return softwareRepository.delete(name);
 	}
-	
-	
+
 	@GetMapping(value = "/")
 	public String isServerOK() {
-		return softwareService.test();
+		return softwareRepository.test();
 	}
 }
