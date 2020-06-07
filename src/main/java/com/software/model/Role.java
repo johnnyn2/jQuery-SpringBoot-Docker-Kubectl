@@ -1,15 +1,24 @@
 package com.software.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "role")
 public class Role {
     @Id
+    @Column
     private int role_id;
+    @Column
     private String name;
+    @Column
     private String description;
 
     public int getRole_id() {
@@ -35,4 +44,5 @@ public class Role {
     public void setDescription(String description) {
         this.description = description;
     }
+    
 }
