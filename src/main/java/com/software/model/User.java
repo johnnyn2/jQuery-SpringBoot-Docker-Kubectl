@@ -5,10 +5,9 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -22,19 +21,14 @@ public class User {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
     @Column
     private String username;
     @Column
     private String password;
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "user_role",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
+    @Column
+    private String permission;
 
     public int getUser_id() {
         return user_id;
@@ -60,12 +54,12 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 
     
