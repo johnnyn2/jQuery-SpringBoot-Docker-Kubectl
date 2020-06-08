@@ -62,5 +62,11 @@ public class User {
         this.permission = permission;
     }
 
+    @Override
+    public String toString() {
+        return "User [password=" + password + ", permission=" + permission + ", user_id=" + user_id + ", username="
+                + username + "]";
+    }
+
     
 }
