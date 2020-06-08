@@ -20,16 +20,34 @@
                             <th>name</th>
                             <th>version</th>
                             <th>description</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <#list softwares as software>
                             <tr>
-                                <td>${software.name}</td>
-                                <td>${software.version}</td>
-                                <td>${software.description}</td>
+                                <td style="vertical-align:middle;">${software.name}</td>
+                                <td style="vertical-align:middle;">${software.version}</td>
+                                <td style="vertical-align:middle;">${software.description}</td>
+                                <td>
+                                    <a href="${'/getSoftware?name='+software.name}" class="btn btn-primary" role="button">Edit</a>
+                                </td>
+                                <td>
+                                    <form action="${'/delete?name='+software.name}" name="software" method="DELETE">
+                                        <input class="btn btn-danger" role="button" type="submit" value="Delete">
+                                    </form>
+                                </td>
                             </tr>
                         </#list>
+                        <tr>
+                            <form action="/addSoftware" name="software" method="POST">
+                                <td><input class="form-control" type="text" name="name"></td>
+                                <td><input class="form-control" type="text" name="version"></td>
+                                <td><input class="form-control" type="text" name="description"></td>
+                                <td colspan="2"><button type="submit" class="btn btn-success" style="width: 100%;">Create</button></td>
+                            </form>
+                        </tr>
                     </tbody>
                 </table>
             </div>
