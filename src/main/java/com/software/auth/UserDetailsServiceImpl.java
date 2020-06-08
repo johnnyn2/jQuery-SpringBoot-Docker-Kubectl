@@ -1,9 +1,13 @@
 package com.software.auth;
 
+import java.util.List;
+
 import com.software.model.User;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SessionFactory factory;
@@ -34,8 +39,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional
+    @SuppressWarnings("unchecked")
     private User findUserbyUsername(String username) {
-        return getSession().get(User.class, username);
+        Criteria cr = getSession().createCriteria(User.class);
+        cr.add(Restrictions.eq("username", username));
+        List<User> results = cr.list();
+        if (results.size() > 0) {
+            return results.get(0);
+        }
+        return null;
     }
 
     private Session getSession() {
