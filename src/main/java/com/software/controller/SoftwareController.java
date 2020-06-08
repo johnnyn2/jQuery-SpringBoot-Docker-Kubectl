@@ -1,5 +1,6 @@
 package com.software.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.software.model.Software;
 import com.software.repository.SoftwareRepository;
@@ -26,8 +28,11 @@ public class SoftwareController {
 	}
 
 	@GetMapping("/getAll")
-	public List<Software> getAll() {
-		return softwareRepository.get();
+	public ModelAndView getAll() {
+		List<Software> softwares = softwareRepository.get();
+		Map<String, Object> params = new HashMap<>();
+		params.put("softwares", softwares);
+		return new ModelAndView("getAll", params);
 	}
 
 	@PostMapping("/addSoftware")
@@ -50,8 +55,8 @@ public class SoftwareController {
 		return softwareRepository.delete(name);
 	}
 
-	@GetMapping(value = "/")
-	public String isServerOK() {
-		return softwareRepository.test();
+	@GetMapping("/")
+	public ModelAndView index(Software software) {
+		return new ModelAndView("index");
 	}
 }
