@@ -2,6 +2,7 @@ package com.software.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +16,7 @@ import lombok.Setter;
 public class Role {
     @Id
     @Column
+    @GeneratedValue
     private int role_id;
     @Column
     private String name;
