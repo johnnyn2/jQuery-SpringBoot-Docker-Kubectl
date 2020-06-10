@@ -11,12 +11,12 @@
 </head>
 <body>
     <div class="container">
-        <div class="card bg-primary text-white">
-            <div class="card-header">
+        <div class="card  text-white">
+            <div class="card-header bg-primary">
                 <h2>Home page</h2>
             </div>
             <div class="card-body">
-                <a href="getAll" class="text-white">Get All Softwares from DB</a>
+                <a href="getAll">Get All Softwares from DB</a>
             </div>
         </div>
     </div>
