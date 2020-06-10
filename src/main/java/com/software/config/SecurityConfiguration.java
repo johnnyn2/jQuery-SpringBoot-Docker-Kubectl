@@ -45,31 +45,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling()
-                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-                .accessDeniedHandler(new AccessDeniedHandlerImpl())
-                .and()
-                .addFilterAt(loginAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/user/**").hasRole("USER")
-                .and()
-                .logout()
-                .logoutUrl("/api/logout")
-                .invalidateHttpSession(true)
-                .logoutSuccessHandler((req, resp, auth) -> {
-                    resp.setContentType("application/json;charset=UTF-8");
-                    PrintWriter out = resp.getWriter();
-                    resp.setStatus(200);
-                    Map<String, String> result = Map.of("message", "Logout success");
-                    ObjectMapper om = new ObjectMapper();
-                    out.write(om.writeValueAsString(result));
-                    out.flush();
-                    out.close();
-                })
-                .and()
-                .csrf()
-                .disable();
+        http.authorizeRequests()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .and()
+            .httpBasic();
+        // http.exceptionHandling()
+        //         .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+        //         .accessDeniedHandler(new AccessDeniedHandlerImpl())
+        //         .and()
+        //         .addFilterAt(loginAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        //         .authorizeRequests()
+        //         .anyRequest().authenticated()
+        //         .antMatchers("/api/admin/**").hasRole("ADMIN")
+        //         .antMatchers("/api/user/**").hasRole("USER")
+        //         .and()
+        //         .logout()
+        //         .logoutUrl("/api/logout")
+        //         .invalidateHttpSession(true)
+        //         .logoutSuccessHandler((req, resp, auth) -> {
+        //             resp.setContentType("application/json;charset=UTF-8");
+        //             PrintWriter out = resp.getWriter();
+        //             resp.setStatus(200);
+        //             Map<String, String> result = Map.of("message", "Logout success");
+        //             ObjectMapper om = new ObjectMapper();
+        //             out.write(om.writeValueAsString(result));
+        //             out.flush();
+        //             out.close();
+        //         })
+        //         .and()
+        //         .csrf()
+        //         .disable();
     }
 
     @Bean
