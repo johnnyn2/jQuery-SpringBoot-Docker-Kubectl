@@ -23,8 +23,12 @@ public class SoftwareController {
 	private SoftwareRepository softwareRepository;
 
 	@GetMapping("/getSoftware")
-	public Software getSoftware(@RequestParam(name = "name") String name) {
-		return softwareRepository.get(name);
+	public ModelAndView getSoftware(@RequestParam(name = "name") String name) {
+		// return softwareRepository.get(name);
+		Software software = softwareRepository.get(name);
+		Map<String, Object> params = new HashMap<>();
+		params.put("software", software);
+		return new ModelAndView("getSoftware", params);
 	}
 
 	@GetMapping("/getAll")

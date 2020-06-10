@@ -7,7 +7,7 @@
     <script src="jquery-3.5.1.min.js"></script>
     <script src="bootstrap-4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="global.css">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
     <div class="container">
