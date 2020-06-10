@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap-4.5.0/css/bootstrap.min.css">
     <script src="jquery-3.5.1.min.js"></script>
+    <script src="bootstrap-4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="global.css">
     <script>
         $(document).ready(() => {
             if(sessionStorage.getItem("status") === "success") {
@@ -58,8 +60,30 @@
                             }
                         })
                     }
-                } else if (formType === "delete-form") {
-
+                } else if (formType.indexOf("delete-form") >= 0) {
+                    console.log("ddddd: ", $(this));
+                    $("#msg").removeClass("alert-danger").removeClass("alert-success").addClass("alert-info").html("Loading...").css("display", "");
+                    console.log('deelte daat: ', event, name);
+                    
+                    $.ajax({
+                        url: '/delete',
+                        method: 'DELETE',
+                        data: $(this).serialize(),
+                        timeout: 15000,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        success: function(data) {
+                            console.log("success");
+                            sessionStorage.setItem("status", "success");
+                            window.location.reload();
+                        },
+                        error: function(data) {
+                            console.log("error");
+                            $("#msg").removeClass("alert-info").removeClass("alert-success").addClass("alert-danger").html("Error !").css("display", "");
+                        },
+                        complete: function(data) {
+                            console.log("complete");
+                        }
+                    })
                 }
             })
         })
@@ -93,8 +117,30 @@
                                     <a href="${'/getSoftware?name='+software.name}" class="btn btn-primary" role="button">Edit</a>
                                 </td>
                                 <td>
-                                    <form id="delete-form" action="${'/delete?name='+software.name}" name="software" method="DELETE">
-                                        <input class="btn btn-danger" role="button" type="submit" value="Delete">
+                                    <button class="btn btn-danger" role="button" data-toggle="modal" data-target="${'#warning-dialog-' + software?index}">
+                                        Delete
+                                    </button>
+                                    <form id="${'delete-form-' + software?index}" action="${'/delete?name='+software.name}" name="software" method="DELETE">
+                                        <input type="hidden" name="name" value="${software.name}">
+                                        <div class="modal fade" id="${'warning-dialog-' + software?index}" tabindex="-1" role="dialog" aria-labelledby="warning-dialog" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="warning-dialog-title">Warning</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    This is an unreversible action. Please click confirm to delete.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="submit" class="btn btn-danger" form="${'delete-form-' + software?index}" value="Confirm">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
@@ -116,5 +162,6 @@
             Loading...
         </div>
     </div>
+    
 </body>
 </html>
