@@ -92,11 +92,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
                 <h2>Software List</h2>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
