@@ -113,15 +113,15 @@
                                 <td style="vertical-align:middle;">${software.name}</td>
                                 <td style="vertical-align:middle;">${software.version}</td>
                                 <td style="vertical-align:middle;">${software.description}</td>
-                                <td>
-                                    <a href="${'/getSoftware?name='+software.name}" class="btn btn-primary" role="button">Edit</a>
+                                <td style="width: 100px;">
+                                    <a href="${'/getSoftware?id='+software.id}" class="btn btn-primary d-block" role="button">Edit</a>
                                 </td>
-                                <td>
-                                    <button class="btn btn-danger" role="button" data-toggle="modal" data-target="${'#warning-dialog-' + software?index}">
+                                <td style="width: 100px;">
+                                    <button style="width: 100%;" class="btn btn-danger" role="button" data-toggle="modal" data-target="${'#warning-dialog-' + software?index}">
                                         Delete
                                     </button>
                                     <form id="${'delete-form-' + software?index}" action="${'/delete?name='+software.name}" name="software" method="DELETE">
-                                        <input type="hidden" name="name" value="${software.name}">
+                                        <input type="hidden" name="id" value="${software.id}">
                                         <div class="modal fade" id="${'warning-dialog-' + software?index}" tabindex="-1" role="dialog" aria-labelledby="warning-dialog" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">

@@ -23,9 +23,9 @@ public class SoftwareController {
 	private SoftwareRepository softwareRepository;
 
 	@GetMapping("/getSoftware")
-	public ModelAndView getSoftware(@RequestParam(name = "name") String name) {
+	public ModelAndView getSoftware(@RequestParam(name = "id") int id) {
 		// return softwareRepository.get(name);
-		Software software = softwareRepository.get(name);
+		Software software = softwareRepository.get(id);
 		Map<String, Object> params = new HashMap<>();
 		params.put("software", software);
 		return new ModelAndView("getSoftware", params);
@@ -55,8 +55,8 @@ public class SoftwareController {
 	}
 
 	@DeleteMapping("/delete")
-	public Software deleteSoftware(@RequestParam(name = "name") String name) {
-		return softwareRepository.delete(name);
+	public Software deleteSoftware(@RequestParam(name = "id") int id) {
+		return softwareRepository.delete(id);
 	}
 
 	@GetMapping("/")

@@ -33,8 +33,9 @@
                 } else {
                     const formData = {};
                     $(this).serializeArray().forEach((data) =>{
-                    formData[data.name] = data.value;
+                        formData[data.name] = data.value;
                     });
+                    formData.id = Number(formData.id);
                     $("#msg").removeClass("alert-danger").removeClass("alert-success").addClass("alert-info").html("Loading...").css("display", "");
                     $.ajax({
                         url: '/update',
@@ -76,6 +77,7 @@
             <div class="card-body">
                 <#if software??>
                     <form id="update-form">
+                        <input type="hidden" name="id" value="${software.id}">
                         <div class="form-group">
                             <label for="software-name">
                                 Name
