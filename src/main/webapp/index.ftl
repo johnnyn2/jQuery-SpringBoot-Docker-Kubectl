@@ -17,6 +17,7 @@
             </div>
             <div class="card-body">
                 <a href="getAll">Get All Softwares from DB</a>
+                <a href="logout" class="btn btn-danger">Logout</a>
             </div>
         </div>
     </div>

@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/user/**").hasRole("USER")
         .and()
         .logout()
-        .logoutUrl("/api/logout")
+        .logoutUrl("/logout")
         .invalidateHttpSession(true)
         .logoutSuccessHandler((req, resp, auth) -> {
             // The follow code is to generate JSON response for restful api
