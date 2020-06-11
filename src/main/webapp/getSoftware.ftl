@@ -82,19 +82,19 @@
                             <label for="software-name">
                                 Name
                             </label>
-                            <input id="software-name" class="form-control" type="text" name="name" value="${software.name}" placeholder="Software name (e.g. Eclipse)">
+                            <input required id="software-name" class="form-control" type="text" name="name" value="${software.name}" placeholder="Software name (e.g. Eclipse)">
                         </div>
                         <div class="form-group">
                             <label for="software-version">
                                 Version
                             </label>
-                            <input id="software-version" class="form-control" type="text" name="version" value="${software.version}" placeholder="Software version (e.g. 1.0)">
+                            <input required id="software-version" class="form-control" type="text" name="version" value="${software.version}" placeholder="Software version (e.g. 1.0)">
                         </div>
                         <div class="form-group">
                             <label for="software-description">
                                 Description
                             </label>
-                            <input id="software-description" class="form-control" type="text" name="description" value="${software.description}" placeholder="Software description (e.g. This is used to code)">
+                            <input required id="software-description" class="form-control" type="text" name="description" value="${software.description}" placeholder="Software description (e.g. This is used to code)">
                         </div>
                         <input type="submit" class="btn btn-primary" value="Save">
                         <a href="getAll" class="btn btn-secondary">Back</a>
