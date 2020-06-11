@@ -18,15 +18,18 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 	    AuthenticationException authException) throws IOException, ServletException {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> map = Map.of("error", "Please login");
-        String error = mapper.writeValueAsString(map);
-        response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setStatus(response.SC_UNAUTHORIZED);
-        PrintWriter writer = response.getWriter();
-        writer.write(error);
-        writer.flush();
-        writer.close();
+        // The follow code is to generate JSON response for restful api
+        // ObjectMapper mapper = new ObjectMapper();
+        // Map<String, String> map = Map.of("error", "Please login");
+        // String error = mapper.writeValueAsString(map);
+        // response.setContentType("application/json;charset=UTF-8");
+        // response.setCharacterEncoding("UTF-8");
+        // response.setStatus(response.SC_UNAUTHORIZED);
+        // PrintWriter writer = response.getWriter();
+        // writer.write(error);
+        // writer.flush();
+        // writer.close();
+
+        response.sendRedirect("/login");
 	}
 }

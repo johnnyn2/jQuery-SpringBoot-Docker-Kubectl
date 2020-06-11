@@ -19,14 +19,17 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
             throws IOException, ServletException {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> result = Map.of("message", "Access Denied");
-        response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        PrintWriter out = response.getWriter();
-        out.write(mapper.writeValueAsString(result));
-        out.flush();
-        out.close();
+        // The follow code is to generate JSON response for restful api
+        // ObjectMapper mapper = new ObjectMapper();
+        // Map<String, String> result = Map.of("message", "Access Denied");
+        // response.setContentType("application/json;charset=UTF-8");
+        // response.setCharacterEncoding("UTF-8");
+        // response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        // PrintWriter out = response.getWriter();
+        // out.write(mapper.writeValueAsString(result));
+        // out.flush();
+        // out.close();
+
+        response.sendRedirect("/accessDenied");
     }
 }

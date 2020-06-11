@@ -17,13 +17,16 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = httpServletResponse.getWriter();
-        httpServletResponse.setStatus(404);
-        Map<String, String> result = Map.of("message", "Login fail");
-        ObjectMapper om = new ObjectMapper();
-        out.write(om.writeValueAsString(result));
-        out.flush();
-        out.close();
+        // The follow code is to generate JSON response for restful api
+        // httpServletResponse.setContentType("application/json;charset=UTF-8");
+        // PrintWriter out = httpServletResponse.getWriter();
+        // httpServletResponse.setStatus(404);
+        // Map<String, String> result = Map.of("message", "Login fail");
+        // ObjectMapper om = new ObjectMapper();
+        // out.write(om.writeValueAsString(result));
+        // out.flush();
+        // out.close();
+
+        httpServletResponse.sendRedirect("/loginFailed");
     }
 }
