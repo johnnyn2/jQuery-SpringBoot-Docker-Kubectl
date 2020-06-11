@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +65,29 @@ public class SoftwareController {
 
 	@GetMapping("/")
 	public ModelAndView index(Software software) {
-		return new ModelAndView("index");
+		String role = hasRole("ROLE_ADMIN") ? "ADMIN" : "USER";
+		Map<String, String> params = new HashMap<>();
+		params.put("role", role);
+		Map<String, Object> out = new HashMap<>();
+		out.put("role", params);
+		return new ModelAndView("index", out);
 	}
+
+	protected boolean hasRole(String role) {
+        // get security context from thread local
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return false;
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return false;
+
+        for (GrantedAuthority auth : authentication.getAuthorities()) {
+            if (role.equals(auth.getAuthority()))
+                return true;
+        }
+
+        return false;
+    }
 }

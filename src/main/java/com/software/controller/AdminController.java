@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class AdminController {
@@ -35,11 +38,17 @@ public class AdminController {
 	}
 
     @PostMapping("api/admin/add")
-    public String addUserByAdmin(@RequestBody User user) {
+    public User addUserByAdmin(@RequestBody User user) {
         String pwd = user.getPassword();
         String encryptedPwd = passwordEncoder.encode(pwd);
         user.setPassword(encryptedPwd);
         userRepository.save(user);
-        return "user added successfully...";
+        return user;
     }
+
+    @GetMapping("addPeople")
+    public ModelAndView addPeople() {
+        return new ModelAndView("addPeople");
+    }
+    
 }

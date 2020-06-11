@@ -11,12 +11,19 @@
 </head>
 <body>
     <div class="container">
-        <div class="card  text-white">
-            <div class="card-header bg-primary">
+        <div class="card">
+            <div class="text-white card-header bg-primary">
                 <h2>Home page</h2>
             </div>
             <div class="card-body">
-                <a href="getAll">Get All Softwares from DB</a>
+                <div class="card-text">
+                    <a href="getAll">Get All Softwares from DB</a>
+                <div>
+                <div class="card-text">
+                    <#if role?? && role.role == "ADMIN">
+                        <a href="addPeople">Add Admin/User</a>
+                    </#if>
+                </div>
                 <a href="logout" class="btn btn-danger">Logout</a>
             </div>
         </div>

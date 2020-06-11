@@ -161,7 +161,8 @@
         <div id="msg" class="alert alert-info" role="alert" style="display: none;">
             Loading...
         </div>
-        <a href="logout" class="btn btn-danger">Logout</a>
+        <a href="/" class="btn btn-secondary mt-3">Back</a>
+        <a href="logout" class="btn btn-danger mt-3">Logout</a>
     </div>
     
 </body>
