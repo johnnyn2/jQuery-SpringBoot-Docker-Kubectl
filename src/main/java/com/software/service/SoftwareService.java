@@ -8,7 +8,7 @@ import com.software.model.Software;
 
 @Service
 public interface SoftwareService {
-	public Software get(String name);
+	public Software get(int id);
 
 	public List<Software> get();
 
@@ -16,7 +16,7 @@ public interface SoftwareService {
 
 	public List<Software> saveAll(List<Software> softwares);
 
-	public Software delete(String name);
+	public Software delete(int id);
 
 	public Software update(Software software);
 

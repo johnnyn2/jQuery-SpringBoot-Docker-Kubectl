@@ -1,9 +1,14 @@
 package com.software.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.software.model.Software;
 import com.software.repository.SoftwareRepository;
@@ -20,26 +26,21 @@ public class SoftwareController {
 	@Autowired
 	private SoftwareRepository softwareRepository;
 
-	@GetMapping("/api/admin/hello")
-	public Map<String, String> adminSayHello() {
-		Map<String, String> result = Map.of("message", "admin say hello");
-		return result;
-	}
-
-	@GetMapping("/api/user/hello")
-	public Map<String, String> userSayHello() {
-		Map<String, String> result = Map.of("message", "user say hello");
-		return result;
-	}
-
 	@GetMapping("/getSoftware")
-	public Software getSoftware(@RequestParam(name = "name") String name) {
-		return softwareRepository.get(name);
+	public ModelAndView getSoftware(@RequestParam(name = "id") int id) {
+		// return softwareRepository.get(name);
+		Software software = softwareRepository.get(id);
+		Map<String, Object> params = new HashMap<>();
+		params.put("software", software);
+		return new ModelAndView("getSoftware", params);
 	}
 
 	@GetMapping("/getAll")
-	public List<Software> getAll() {
-		return softwareRepository.get();
+	public ModelAndView getAll() {
+		List<Software> softwares = softwareRepository.get();
+		Map<String, Object> params = new HashMap<>();
+		params.put("softwares", softwares);
+		return new ModelAndView("getAll", params);
 	}
 
 	@PostMapping("/addSoftware")
@@ -58,12 +59,35 @@ public class SoftwareController {
 	}
 
 	@DeleteMapping("/delete")
-	public Software deleteSoftware(@RequestParam(name = "name") String name) {
-		return softwareRepository.delete(name);
+	public Software deleteSoftware(@RequestParam(name = "id") int id) {
+		return softwareRepository.delete(id);
 	}
 
-	@GetMapping(value = "/")
-	public String isServerOK() {
-		return softwareRepository.test();
+	@GetMapping("/")
+	public ModelAndView index(Software software) {
+		String role = hasRole("ROLE_ADMIN") ? "ADMIN" : "USER";
+		Map<String, String> params = new HashMap<>();
+		params.put("role", role);
+		Map<String, Object> out = new HashMap<>();
+		out.put("role", params);
+		return new ModelAndView("index", out);
 	}
+
+	protected boolean hasRole(String role) {
+        // get security context from thread local
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return false;
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return false;
+
+        for (GrantedAuthority auth : authentication.getAuthorities()) {
+            if (role.equals(auth.getAuthority()))
+                return true;
+        }
+
+        return false;
+    }
 }

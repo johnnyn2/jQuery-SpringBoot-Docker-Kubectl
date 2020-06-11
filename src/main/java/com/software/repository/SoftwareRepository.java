@@ -18,8 +18,8 @@ public class SoftwareRepository implements SoftwareService {
 	private SessionFactory factory;
 
 	@Override
-	public Software get(String name) {
-		return getSession().get(Software.class, name);
+	public Software get(int id) {
+		return getSession().get(Software.class, id);
 	}
 
 	@Override
@@ -43,15 +43,15 @@ public class SoftwareRepository implements SoftwareService {
 	}
 
 	@Override
-	public Software delete(String name) {
-        Software s = getSession().get(Software.class, name);
+	public Software delete(int id) {
+        Software s = getSession().get(Software.class, id);
         getSession().delete(s);
 		return s;
 	}
 
 	@Override
 	public Software update(Software software) {
-        Software s = getSession().get(Software.class, software.getName());
+        Software s = getSession().get(Software.class, software.getId());
         s.setName(software.getName());
         s.setVersion(software.getVersion());
         s.setDescription(software.getDescription());
