@@ -65,15 +65,15 @@
                 <form id="create-user">
                     <div class="form-group">
                         <label for="input-username">Username</label>
-                        <input id="input-username" class="form-control" type="text" name="username">
+                        <input required id="input-username" class="form-control" type="text" name="username">
                     <div>
                     <div class="form-group">
                         <label for="input-password">Password</label>
-                        <input id="input-password" class="form-control" type="password" name="password">
+                        <input required id="input-password" class="form-control" type="password" name="password">
                     </div>
                     <div class="form-group">
                         <label for="input-confirm-password">Confirm password</label>
-                        <input id="input-confirm-password" class="form-control" type="password" name="confirmPassword">
+                        <input required id="input-confirm-password" class="form-control" type="password" name="confirmPassword">
                     </div>
                     <div class="form-group">
                         <label for="input-select">Role</label>

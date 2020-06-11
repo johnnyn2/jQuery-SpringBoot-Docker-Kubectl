@@ -147,9 +147,9 @@
                         </#list>
                         <tr>
                             <form id="create-form" action="/addSoftware" name="software" method="POST">
-                                <td><input class="form-control" type="text" name="name"></td>
-                                <td><input class="form-control" type="text" name="version"></td>
-                                <td><input class="form-control" type="text" name="description"></td>
+                                <td><input required class="form-control" type="text" name="name"></td>
+                                <td><input required class="form-control" type="text" name="version"></td>
+                                <td><input required class="form-control" type="text" name="description"></td>
                                 <td colspan="2"><button type="submit" class="btn btn-success" style="width: 100%;">Create</button></td>
                             </form>
                         </tr>
