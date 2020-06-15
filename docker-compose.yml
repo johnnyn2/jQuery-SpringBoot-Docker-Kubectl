@@ -1,0 +1,31 @@
+version: '3'
+services: 
+    docker-mysql:
+        restart: always
+        container_name: docker-mysql
+        image: mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: Efsios#@469
+            MYSQL_DATABASE: software
+            MYSQL_USER: johnnyho
+            MYSQL_PASSWORD: Efsios#@469
+        volumes:
+            - ./sql:/docker-entrypoint-initdb.d
+        ports:
+            - "3307:3306"
+        healthcheck:
+            test: "/usr/bin/mysql --user=johnnyho --password=Efsios#@469 \"SHOW DATABASES;\""
+            interval: 2s
+            timeout: 20s
+            retries: 10
+    final-app:
+        restart: on-failure
+        build: ./
+        expose:
+            - "8888"
+        ports:
+            - 8888:8888
+        environment:
+            WAIT_HOSTS: mysql:3307
+        depends_on: 
+            - docker-mysql
