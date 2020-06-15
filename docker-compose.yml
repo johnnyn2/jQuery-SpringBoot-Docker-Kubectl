@@ -10,11 +10,11 @@ services:
             MYSQL_USER: johnnyho
             MYSQL_PASSWORD: Efsios#@469
         volumes:
-            - ./sql:/docker-entrypoint-initdb.d
+            - ./init.sql:/data/application/init.sql
         ports:
             - "3307:3306"
         healthcheck:
-            test: "/usr/bin/mysql --user=johnnyho --password=Efsios#@469 \"SHOW DATABASES;\""
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             interval: 2s
             timeout: 20s
             retries: 10
