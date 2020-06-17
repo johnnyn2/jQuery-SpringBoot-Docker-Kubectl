@@ -31,12 +31,12 @@ spec:                              # Access mode and resource limits
 apiVersion: v1                    # API version
 kind: Service                     # Type of kubernetes resource 
 metadata:
-  name: mysql         # Name of the resource
+  name: docker-mysql         # Name of the resource
   labels:                         # Labels that will be applied to the resource
     app: spring-app
 spec:
   ports:
-    - port: 3307
+    - port: 3306
   selector:                       # Selects any Pod with labels `app=spring-app,tier=mysql`
     app: spring-app
     tier: mysql
@@ -62,7 +62,7 @@ spec:
         tier: mysql
     spec:                           # The spec for the containers that will be run inside the Pods in this deployment
       containers:
-      - image: johnnyhohohohohoho/spring-software-api:db            # The container image
+      - image: mysql:8.0.17           # The container image
         name: mysql
         env:                        # Environment variables passed to the container 
         - name: MYSQL_ROOT_PASSWORD 
@@ -86,7 +86,7 @@ spec:
               name: mysql-user-pass
               key: password
         ports:
-        - containerPort: 3307        # The port that the container exposes       
+        - containerPort: 3306        # The port that the container exposes       
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage  # This name should match the name specified in `volumes.name`
