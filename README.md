@@ -1,4 +1,4 @@
-<h2>Commands for building images for spring app and mysql db:</h2>
+<h2>Useful commands for building images for spring app and mysql db:</h2>
 <h3>1. Execute docker-compose.yaml</h3>
 <p><code>docker-compose up</code></p>
 
