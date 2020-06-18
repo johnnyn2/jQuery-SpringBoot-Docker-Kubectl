@@ -17,15 +17,15 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 @PropertySource(value = { "classpath:application.properties" })
 @Configuration
 public class SoftwareConfiguration {
-	@Value("${jdbc.driverClassName}")
+	@Value("${spring.datasource.driver-class-name}")
 	private String driverClass;
-	@Value("${jdbc.url}")
+	@Value("${spring.datasource.url}")
 	private String url;
-	@Value("${jdbc.username}")
+	@Value("${spring.datasource.username}")
 	private String username;
-	@Value("${jdbc.password}")
+	@Value("${spring.datasource.password}")
 	private String password;
-	@Value("${hibernate.dialect}")
+	@Value("${spring.jpa.database-platform}")
 	private String dialect;
 
 	@Bean
