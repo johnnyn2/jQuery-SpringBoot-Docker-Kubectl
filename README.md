@@ -28,10 +28,13 @@
 <h3>8. Run a image with specified container name and port mapping</h3>
 <p><code>docker run -d --name {name} -p {LocalPort:DockerPort} {image}</code></p>
 
-<h3>9. Show all volumes</h3>
+<h3>9. Start a container</h3>
+<p><code>docker start {container_id/container_name}</code></p>
+
+<h3>10. Show all volumes</h3>
 <p><code>docker volume ls</code></p>
 
-<h3>10. Remove all unused volumes</h3>
+<h3>11. Remove all unused volumes</h3>
 <p><code>docker volume prune</code></p>
 
 <br/>
