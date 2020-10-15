@@ -4,31 +4,37 @@
 
 <br/>
 <h2>Useful commands when working on Docker:</h2>
-<h3>1. Show all running containers</h3>
+<h3>1. Build image</h3>
+<p><code>docker build -t {image_name} .</code></p>
+
+<h3>2. Show all running containers</h3>
 <p><code>docker ps</code></p>
 
-<h3>2. Show all containers</h3>
+<h3>3. Show all containers</h3>
 <p><code>docker ps -a</code></p>
 
-<h3>3. Stop a container</h3>
+<h3>4. Stop a container</h3>
 <p><code>docker stop {container}</code></p>
 
-<h3>4. Remove a container</h3>
+<h3>5. Remove a container</h3>
 <p><code>docker rm {container}</code></p>
 
-<h3>5. Show all docker images</h3>
+<h3>6. Show all docker images</h3>
 <p><code>docker images</code></p>
 
-<h3>6. Remove a docker image. It can be removed when no container is using it.</h3>
+<h3>7. Remove a docker image. It can be removed when no container is using it.</h3>
 <p><code>docker rmi {image}</code></p>
 
-<h3>7. Run a image with specified container name and port mapping</h3>
+<h3>8. Run a image with specified container name and port mapping</h3>
 <p><code>docker run -d --name {name} -p {LocalPort:DockerPort} {image}</code></p>
 
-<h3>8. Show all volumes</h3>
+<h3>9. Start a container</h3>
+<p><code>docker start {container_id/container_name}</code></p>
+
+<h3>10. Show all volumes</h3>
 <p><code>docker volume ls</code></p>
 
-<h3>9. Remove all unused volumes</h3>
+<h3>11. Remove all unused volumes</h3>
 <p><code>docker volume prune</code></p>
 
 <br/>
