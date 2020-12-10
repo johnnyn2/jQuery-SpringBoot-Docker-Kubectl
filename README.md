@@ -1,3 +1,6 @@
+<h2>Images of the springBoot app and database:</h2>
+<h3>https://hub.docker.com/repository/docker/johnnyhohohohohoho/spring-software-api/general</h3>
+
 <h2>Useful commands for building images for spring app and mysql db:</h2>
 <h3>1. Execute docker-compose.yaml</h3>
 <p><code>docker-compose up</code></p>
