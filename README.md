@@ -1,4 +1,4 @@
-<h2>Images of the springBoot app and database:</h2>
+<h2>Images of the Spring Boot app and database:</h2>
 <h3>https://hub.docker.com/repository/docker/johnnyhohohohohoho/spring-software-api/general</h3>
 
 <h2>Useful commands for building images for spring app and mysql db:</h2>
